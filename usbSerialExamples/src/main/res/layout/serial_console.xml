@@ -31,6 +31,28 @@
         android:text="@string/textBtnRTS"
         android:id="@+id/checkBoxRTS" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/inputText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Button" />
+    </LinearLayout>
+
     <View
         android:id="@+id/separator2"
         android:layout_width="match_parent"
@@ -51,4 +73,5 @@
             android:layout_height="wrap_content"
             android:typeface="monospace" />
     </ScrollView>
+
 </LinearLayout>

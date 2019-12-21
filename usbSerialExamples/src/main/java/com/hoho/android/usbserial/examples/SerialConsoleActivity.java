@@ -28,10 +28,13 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Button;
 
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 import com.hoho.android.usbserial.util.HexDump;
@@ -68,6 +71,8 @@ public class SerialConsoleActivity extends Activity {
     private ScrollView mScrollView;
     private CheckBox chkDTR;
     private CheckBox chkRTS;
+    private EditText inputText;
+    private Button sendButton;
 
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
@@ -101,6 +106,8 @@ public class SerialConsoleActivity extends Activity {
         mScrollView = (ScrollView) findViewById(R.id.demoScroller);
         chkDTR = (CheckBox) findViewById(R.id.checkBoxDTR);
         chkRTS = (CheckBox) findViewById(R.id.checkBoxRTS);
+        inputText = (EditText) findViewById(R.id.inputText);
+        sendButton = (Button) findViewById(R.id.sendButton);
 
         chkDTR.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -117,6 +124,18 @@ public class SerialConsoleActivity extends Activity {
                 try {
                     sPort.setRTS(isChecked);
                 }catch (IOException x){}
+            }
+        });
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String input = inputText.getText().toString();
+                try {
+                    sPort.write(input.getBytes(), 10);
+                } catch (IOException e) {
+                    Log.e(TAG, e.getMessage());
+                }
             }
         });
 
